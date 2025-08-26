@@ -12,12 +12,12 @@
 
 With CLAP, you can extract a latent representation of any given audio and text for your own model, or for different downstream tasks.
 
-All codes are comming officially with the following paper, accepted by IEEE International Conference on Acoustics, Speech and Signal Processing, ICASSP 2023:
+All codes officially come with the following paper, accepted by IEEE International Conference on Acoustics, Speech and Signal Processing, ICASSP 2023:
  - [Large-Scale Contrastive Language-Audio Pretraining with Feature Fusion and Keyword-to-Caption Augmentation](https://arxiv.org/abs/2211.06687)
 
 **New Updates:** 
 
-<b>1. We release new CLAP pretrained checkpoints pretrained on music and speech data collecstions from [our dataset collection repo](https://github.com/LAION-AI/audio-dataset).</b>
+<b>1. We release new CLAP pretrained checkpoints pretrained on music and speech data collections from [our dataset collection repo](https://github.com/LAION-AI/audio-dataset).</b>
 
 <b>2. CLAP model is incorporated and supported by [HuggingFace Transformers](https://huggingface.co/docs/transformers/v4.27.2/en/model_doc/clap). Many thanks to [Younes Belkada](https://huggingface.co/ybelkada) and [Arthur Zucker](https://fr.linkedin.com/in/arthur-zucker-8a0445144) for contributing to the HuggingFace support. </b>
 
@@ -95,13 +95,13 @@ audio_embed = model.get_audio_embedding_from_data(x = audio_data, use_tensor=Tru
 print(audio_embed[:,-20:])
 print(audio_embed.shape)
 
-# Get text embedings from texts:
+# Get text embeddings from texts:
 text_data = ["I love the contrastive learning", "I love the pretrain model"] 
 text_embed = model.get_text_embedding(text_data)
 print(text_embed)
 print(text_embed.shape)
 
-# Get text embedings from texts, but return torch tensor:
+# Get text embeddings from texts, but return torch tensor:
 text_data = ["I love the contrastive learning", "I love the pretrain model"] 
 text_embed = model.get_text_embedding(text_data, use_tensor=True)
 print(text_embed)
@@ -183,15 +183,15 @@ We use [Weights and Biases](https://wandb.ai/site) for experiment logging. You n
 To train on local dataset, please change the `--remotedata` in training scripts (see [experiment_scripts](./experiment_scripts) folder) with `--datasetpath <your dir to datasets>`.
 
 ## Core Code
-Please refer to [main.py](https://github.com/LAION-AI/CLAP/blob/laion_clap_pip/src/laion_clap/training/main.py), [train.py](https://github.com/LAION-AI/CLAP/blob/laion_clap_pip/src/laion_clap/training/train.py), [data.py](https://github.com/LAION-AI/CLAP/blob/laion_clap_pip/src/laion_clap/training/data.py),and [model.py](https://github.com/LAION-AI/CLAP/blob/laion_clap_pip/src/laion_clap/clap_module/model.py) to quicly get familiar with our model.
+Please refer to [main.py](https://github.com/LAION-AI/CLAP/blob/laion_clap_pip/src/laion_clap/training/main.py), [train.py](https://github.com/LAION-AI/CLAP/blob/laion_clap_pip/src/laion_clap/training/train.py), [data.py](https://github.com/LAION-AI/CLAP/blob/laion_clap_pip/src/laion_clap/training/data.py),and [model.py](https://github.com/LAION-AI/CLAP/blob/laion_clap_pip/src/laion_clap/clap_module/model.py) to quickly get familiar with our model.
 
 
 ## Reproducibility
-An example of the preprocessed Clotho dataset in webdataset format can be download [here](https://drive.google.com/drive/folders/1mU9mBOe11jTFCrQRJQsUa4S-3TlNuYoI?usp=sharing) (by downloading, you will be agreeing the license described in the [Clotho dataset](https://zenodo.org/record/3490684#.Y9ALPeyZP1w)). The audio encoder pretrained with 48kHz AudioSet can be found [here](https://drive.google.com/drive/folders/1SMQyzJvc6DwJNuhQ_WI8tlCFL5HG2vk6?usp=sharing), where `HTSAT-fullset-imagenet-map=0.467.ckpt` is the checkpoint used to initalize our HTSAT audio encoder. You should get similar result by loading from the audio encoder checkpoint and training on same dataset.
+An example of the preprocessed Clotho dataset in webdataset format can be download [here](https://drive.google.com/drive/folders/1mU9mBOe11jTFCrQRJQsUa4S-3TlNuYoI?usp=sharing) (by downloading, you will be agreeing the license described in the [Clotho dataset](https://zenodo.org/record/3490684#.Y9ALPeyZP1w)). The audio encoder pretrained with 48kHz AudioSet can be found [here](https://drive.google.com/drive/folders/1SMQyzJvc6DwJNuhQ_WI8tlCFL5HG2vk6?usp=sharing), where `HTSAT-fullset-imagenet-map=0.467.ckpt` is the checkpoint used to initialize our HTSAT audio encoder. You should get similar result by loading from the audio encoder checkpoint and training on same dataset.
 
 The script to train the model on Clotho dataset is included [here](experiment_scripts/train-only-clotho.sh). You need to replace the `datasetpath` and `pretrained-audio` to pointing to your own directory. You could check the [report](https://stability.wandb.io/clap/clap/reports/CLAP-trained-on-Clotho-dataset--VmlldzoyNzY?accessToken=c0erq9hhp7h880jclihd9j9if679s6bylwto33vo14yo5jg40ppe38qeoafoonpz) of the training script on a single A100 GPU for reference.
 
-Because most of the dataset has copyright restriction, unfortunatly we cannot directly share other preprocessed datasets. The caption generated by keyword-to-caption model for Audioset can be found [here](https://github.com/LAION-AI/audio-dataset/tree/main/laion-audio-630k#keyword-to-caption-augmentation)
+Because most of the dataset has copyright restriction, unfortunately we cannot directly share other preprocessed datasets. The caption generated by keyword-to-caption model for Audioset can be found [here](https://github.com/LAION-AI/audio-dataset/tree/main/laion-audio-630k#keyword-to-caption-augmentation)
 
 
 ## Zeroshot Classification with ESC50 official split
